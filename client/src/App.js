@@ -11,6 +11,7 @@ import AppMuiTheme from './components/AppMuiTheme.js';
 // http://stackoverflow.com/a/34015469/988941 
 injectTapEventPlugin();
 
+/* TODO: make a component called <NavPage> that encapsulates MuiThemeProvider and Navbar */
 class App extends Component {
   render() {
     return (
