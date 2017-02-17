@@ -9,7 +9,7 @@ import {fade} from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 
 
-const AddBenchmarkMuiTheme = getMuiTheme({
+const AppMuiTheme = getMuiTheme({
   spacing: spacing,
   fontFamily: 'Open Sans, Lato, Helvetica Neue, Helvetica, Arial, sans-serif',
   palette: {
@@ -30,4 +30,4 @@ const AddBenchmarkMuiTheme = getMuiTheme({
   }
 });
 
-export default AddBenchmarkMuiTheme;
+export default AppMuiTheme;

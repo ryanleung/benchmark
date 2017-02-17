@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 
 import {Card, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import TextField from 'material-ui/TextField';
 
 import './AddBenchmarkPage.css';
-import AddBenchmarkMuiTheme from './AddBenchmarkMuiTheme.js';
 import NavBar from './NavBar.js';
 
 
@@ -130,30 +128,28 @@ class AddBenchmarkPage extends Component {
     const {finished, stepIndex} = this.state;
 
     return (
-      <MuiThemeProvider muiTheme={AddBenchmarkMuiTheme}>
-        <div>
-          <NavBar />
-          <div className="BenchmarkForm">
-            <div className="BenchmarkForm__stepper">
-              <Stepper activeStep={stepIndex}>
-                <Step>
-                  <StepLabel>Pick a question</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>Fill out metric</StepLabel>
-                </Step>
-              </Stepper>
-            </div>
-            <div className="BenchmarkForm__content">
-              <Card>
-                <CardText>
-                  {this.getStepContent(stepIndex)}
-                </CardText>
-              </Card>
-            </div>
+      <div>
+        <NavBar />
+        <div className="BenchmarkForm">
+          <div className="BenchmarkForm__stepper">
+            <Stepper activeStep={stepIndex}>
+              <Step>
+                <StepLabel>Pick a question</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Fill out metric</StepLabel>
+              </Step>
+            </Stepper>
+          </div>
+          <div className="BenchmarkForm__content">
+            <Card>
+              <CardText>
+                {this.getStepContent(stepIndex)}
+              </CardText>
+            </Card>
           </div>
         </div>
-      </MuiThemeProvider>
+      </div>
     );
   }
 }
