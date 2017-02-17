@@ -1,0 +1,27 @@
+/* BEM naming conventions http://getbem.com/naming/ */
+.BenchmarkForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&__stepper {
+		width: 40%;
+	}
+
+	&__content {
+		width: 60%;
+	}
+}
+
+.QuestionCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	&__question-btn {
+		margin-top: 10px !important;
+		text-transform: none !important;
+	}
+
+}

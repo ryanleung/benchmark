@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import NavBar from './NavBar.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {
-  Step,
-  Stepper,
-  StepLabel,
-} from 'material-ui/Stepper';
+
+import {Card, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import TextField from 'material-ui/TextField';
 
+import './AddBenchmarkPage.css';
 import AddBenchmarkMuiTheme from './AddBenchmarkMuiTheme.js';
+import NavBar from './NavBar.js';
 
 
 class AddBenchmarkPage extends Component {
@@ -39,7 +38,7 @@ class AddBenchmarkPage extends Component {
     switch (stepIndex) {
       case 0:
         return (
-          <div>
+          <div className="QuestionCard">
             <h1>
               Add a Benchmark
             </h1>
@@ -49,41 +48,65 @@ class AddBenchmarkPage extends Component {
             <p>
               Simply pick one of the questions below to answer about a company you work or used to work for.
             </p>
-            <div><RaisedButton label="Question 1" onClick={this.handleNext}/></div>
-            <div><RaisedButton label="Question 2" onClick={this.handleNext}/></div>
-            <div><RaisedButton label="Question 3" onClick={this.handleNext}/></div>
+            <RaisedButton
+              className="QuestionCard__question-btn"
+              label="Question 1" 
+              fullWidth={true}
+              labelStyle={{textTransform: "none"}}
+              onClick={this.handleNext}
+            />
+            <RaisedButton
+              className="QuestionCard__question-btn"
+              label="Question 2" 
+              fullWidth={true}
+              labelStyle={{textTransform: "none"}}
+              onClick={this.handleNext}
+            />
+            <RaisedButton
+              className="QuestionCard__question-btn"
+              label="Question 3" 
+              fullWidth={true}
+              labelStyle={{textTransform: "none"}}
+              onClick={this.handleNext}
+            />
           </div>
         )
       case 1:
         return (
-          <div>
+          <div className="AddBenchmarkMetricCard">
             <h1>
               Add Metrics
             </h1>
             <TextField
               hintText="e.g. Google"
               floatingLabelText="Company"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true} 
+              fullWidth={true} /><br />
             <TextField
               hintText="e.g. Maps division"
               floatingLabelText="Business Unit / Division"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true}
+              fullWidth={true} /><br />
             <TextField
               hintText="e.g. 2009"
               floatingLabelText="Year"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true} 
+              fullWidth={true} /><br />
             <TextField
               hintText="e.g. ????????????"
               floatingLabelText="Metric Question"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true} 
+              fullWidth={true} /><br />
             <TextField
               hintText="e.g. USA"
               floatingLabelText="Country"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true} 
+              fullWidth={true} /><br />
             <TextField
               hintText="e.g. blah"
               floatingLabelText="Verification Code"
-              floatingLabelFixed={true} /><br />
+              floatingLabelFixed={true} 
+              fullWidth={true} /><br />
             <FlatButton
               label="Back"
               disabled={stepIndex === 0}
@@ -107,22 +130,30 @@ class AddBenchmarkPage extends Component {
     const {finished, stepIndex} = this.state;
 
     return (
-      <div className="AddBenchmarkPage">
-        <MuiThemeProvider muiTheme={AddBenchmarkMuiTheme}>
-          <div>
-            <NavBar />
-            <Stepper activeStep={stepIndex}>
-              <Step>
-                <StepLabel>Pick a question</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>Complete metric</StepLabel>
-              </Step>
-            </Stepper>
-            {this.getStepContent(stepIndex)}
+      <MuiThemeProvider muiTheme={AddBenchmarkMuiTheme}>
+        <div>
+          <NavBar />
+          <div className="BenchmarkForm">
+            <div className="BenchmarkForm__stepper">
+              <Stepper activeStep={stepIndex}>
+                <Step>
+                  <StepLabel>Pick a question</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>Fill out metric</StepLabel>
+                </Step>
+              </Stepper>
+            </div>
+            <div className="BenchmarkForm__content">
+              <Card>
+                <CardText>
+                  {this.getStepContent(stepIndex)}
+                </CardText>
+              </Card>
+            </div>
           </div>
-        </MuiThemeProvider>
-      </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
