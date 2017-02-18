@@ -1,0 +1,10 @@
+.ExplorePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__search {
+    margin-top: 30px;
+    width: 70%;
+  }
+}

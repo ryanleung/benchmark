@@ -1,0 +1,18 @@
+.SearchBar {
+  display: flex;
+
+  &__paper {
+    flex-grow: 1;
+  }
+
+  &__icon {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  &__search-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
