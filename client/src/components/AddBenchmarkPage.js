@@ -7,7 +7,7 @@ import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import TextField from 'material-ui/TextField';
 
 import './AddBenchmarkPage.css';
-import NavBar from './NavBar.js';
+import NavPage from './NavPage.js';
 
 
 class AddBenchmarkPage extends Component {
@@ -128,8 +128,7 @@ class AddBenchmarkPage extends Component {
     const {finished, stepIndex} = this.state;
 
     return (
-      <div>
-        <NavBar />
+      <NavPage>
         <div className="BenchmarkForm">
           <div className="BenchmarkForm__stepper">
             <Stepper activeStep={stepIndex}>
@@ -149,7 +148,7 @@ class AddBenchmarkPage extends Component {
             </Card>
           </div>
         </div>
-      </div>
+      </NavPage>
     );
   }
 }
