@@ -20,6 +20,10 @@ gem 'puma', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'foreman', '~> 0.82.0'
 
+# Used for authentication with JWT tokens
+gem 'devise'
+gem 'jwt'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
