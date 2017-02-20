@@ -8,6 +8,18 @@ class AuthenticationController < ApplicationController
     end
   end
 
+  def create_user
+    user = User.new(
+      email: params[:email], 
+      password: params[:password], 
+      password_confirmation: params[:password_confirmation])
+    if user.save
+      render json: payload(user)
+    else
+      render json: {errors: user.errors.full_messages}, status: :bad_request
+    end
+  end
+
   private
 
   def payload(user)
