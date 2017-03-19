@@ -1,0 +1,2 @@
+class BusinessUnit < ApplicationRecord
+end

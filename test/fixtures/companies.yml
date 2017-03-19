@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  industry_id: 1
+  name: MyString
+  founding_date: 2017-03-18
+
+two:
+  industry_id: 1
+  name: MyString
+  founding_date: 2017-03-18

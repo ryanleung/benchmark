@@ -10,10 +10,86 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219211311) do
+ActiveRecord::Schema.define(version: 20170319002818) do
+
+  create_table "business_units", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.date     "founding_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["company_id"], name: "index_business_units_on_company_id"
+    t.index ["name"], name: "index_business_units_on_name"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "industry_id"
+    t.date     "founding_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["founding_date"], name: "index_companies_on_founding_date"
+    t.index ["industry_id"], name: "index_companies_on_industry_id"
+    t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "functions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_functions_on_name", unique: true
+  end
+
+  create_table "industries", force: :cascade do |t|
+    t.string   "name",               null: false
+    t.integer  "parent_industry_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["name"], name: "index_industries_on_name", unique: true
+    t.index ["parent_industry_id"], name: "index_industries_on_parent_industry_id"
+  end
+
+  create_table "metric_names", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "metric_type_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["metric_type_id"], name: "index_metric_names_on_metric_type_id"
+    t.index ["name"], name: "index_metric_names_on_name", unique: true
+  end
+
+  create_table "metric_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "parent_metric_type_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["name"], name: "index_metric_types_on_name", unique: true
+    t.index ["parent_metric_type_id"], name: "index_metric_types_on_parent_metric_type_id"
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.integer  "metric_name_id"
+    t.integer  "metric_type_id"
+    t.integer  "function_id"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.integer  "business_unit_id"
+    t.float    "value"
+    t.string   "value_description"
+    t.string   "geo"
+    t.date     "relevant_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["company_id"], name: "index_metrics_on_company_id"
+    t.index ["function_id"], name: "index_metrics_on_function_id"
+    t.index ["metric_name_id"], name: "index_metrics_on_metric_name_id"
+    t.index ["metric_type_id"], name: "index_metrics_on_metric_type_id"
+    t.index ["user_id"], name: "index_metrics_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "name",                                null: false
+    t.string   "email",                               null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
