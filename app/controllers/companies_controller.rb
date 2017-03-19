@@ -1,5 +1,12 @@
 class CompaniesController < ApplicationController
 
+  # TODO: Remove this if we get hella companies obv
+  def index
+    render json: {
+      data: Company.all.map { |c| c.as_json(include: :industry) }
+    }
+  end
+
   # Using json style guide https://google.github.io/styleguide/jsoncstyleguide.xml
   def show
     company = Company.find_by_id(params[:id])
