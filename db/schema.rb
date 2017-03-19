@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
     t.integer  "function_id"
     t.integer  "user_id"
     t.integer  "company_id",        null: false
+    t.integer  "industry_id",       null: false
     t.integer  "business_unit_id"
     t.float    "value",             null: false
     t.string   "value_description"
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
     t.datetime "updated_at",        null: false
     t.index ["company_id"], name: "index_metrics_on_company_id"
     t.index ["function_id"], name: "index_metrics_on_function_id"
+    t.index ["industry_id"], name: "index_metrics_on_industry_id"
     t.index ["metric_name_id"], name: "index_metrics_on_metric_name_id"
     t.index ["metric_type_id"], name: "index_metrics_on_metric_type_id"
     t.index ["user_id"], name: "index_metrics_on_user_id"
