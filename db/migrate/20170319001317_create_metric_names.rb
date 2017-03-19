@@ -1,7 +1,7 @@
 class CreateMetricNames < ActiveRecord::Migration[5.0]
   def change
     create_table :metric_names do |t|
-      t.string :name
+      t.string :name,              null: false
       t.integer :metric_type_id
 
       t.timestamps

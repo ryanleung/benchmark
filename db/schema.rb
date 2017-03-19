@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20170319002818) do
 
   create_table "business_units", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "company_id"
+    t.string   "name",          null: false
+    t.integer  "company_id",    null: false
     t.date     "founding_date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",          null: false
     t.integer  "industry_id"
     t.date     "founding_date"
     t.datetime "created_at",    null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "functions", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_functions_on_name", unique: true
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "metric_names", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",           null: false
     t.integer  "metric_type_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "metric_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                  null: false
     t.integer  "parent_metric_type_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -68,13 +68,13 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "metrics", force: :cascade do |t|
-    t.integer  "metric_name_id"
-    t.integer  "metric_type_id"
+    t.integer  "metric_name_id",    null: false
+    t.integer  "metric_type_id",    null: false
     t.integer  "function_id"
     t.integer  "user_id"
-    t.integer  "company_id"
+    t.integer  "company_id",        null: false
     t.integer  "business_unit_id"
-    t.float    "value"
+    t.float    "value",             null: false
     t.string   "value_description"
     t.string   "geo"
     t.date     "relevant_date"
