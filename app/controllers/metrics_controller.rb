@@ -1,5 +1,5 @@
 class MetricsController < ApplicationController
-  def create
+  def get
 
   end
 end
