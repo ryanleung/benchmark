@@ -1,11 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-import SearchBar from './SearchBar.js';
+
+import { fetchCompaniesIfNeeded } from './actions'
+import CompanyListContainer from './CompanyListContainer'
+import SearchBar from './SearchBar'
 
 import './ExplorePage.css';
 
 
 class ExplorePage extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchCompaniesIfNeeded(1))
+  }
+
   render() {
     return (
       <div className="ExplorePage">
@@ -14,9 +23,19 @@ class ExplorePage extends Component {
         <div className="ExplorePage__search">
           <SearchBar />
         </div>
+        <div className="ExplorePage__company-list">
+          <h2>Company List</h2>
+          <CompanyListContainer />
+        </div>
       </div>
     )
   }
 }
+
+ExplorePage.propTypes = {
+  dispatch: PropTypes.func.isRequired
+}
+
+ExplorePage = connect()(ExplorePage)
 
 export default ExplorePage;

@@ -1,4 +1,6 @@
-import fetch from 'whatwg-fetch'
+import 'whatwg-fetch'
+
+import Company from '../models/Company'
 
 export const REQUEST_COMPANIES = 'REQUEST_COMPANIES'
 export const RECEIVE_COMPANIES = 'RECVEIVE_COMPANIES'
@@ -13,7 +15,7 @@ function requestCompanies() {
 function receiveCompanies(json) {
   return {
     type: RECEIVE_COMPANIES,
-    companies: json.items
+    items: json.data.items.map(item => Company.from_json(item))
   }
 }
 
