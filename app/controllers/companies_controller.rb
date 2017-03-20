@@ -3,7 +3,10 @@ class CompaniesController < ApplicationController
   # TODO: Remove this if we get hella companies obv
   def index
     render json: {
-      data: Company.all.map { |c| c.as_json(include: :industry) }
+      data: {
+        kind: Company.name,
+        items: Company.all.map { |c| c.as_json(include: :industry) }
+      }
     }
   end
 
@@ -25,7 +28,11 @@ class CompaniesController < ApplicationController
     end
 
     render json: {
-      data: company.as_json(include: :industry)
+      data: {
+        kind: Company.name,
+        id: company.id,
+        item: company.as_json(include: :industry)
+      }
     }
   end
 end
