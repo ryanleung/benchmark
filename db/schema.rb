@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20170319002818) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",          null: false
+    t.string   "name",         null: false
     t.integer  "industry_id"
-    t.date     "founding_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["founding_date"], name: "index_companies_on_founding_date"
+    t.string   "url"
+    t.string   "city"
+    t.string   "state"
+    t.string   "logo_img_url"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["industry_id"], name: "index_companies_on_industry_id"
     t.index ["name"], name: "index_companies_on_name", unique: true
   end
