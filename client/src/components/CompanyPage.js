@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 
 class CompanyPage extends Component {
+  componentDidMount() {
+
+  }
+  
   render() {
     return (
       <div className="CompanyPage">
@@ -15,6 +20,6 @@ CompanyPage.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-
+CompanyPage = connect()(CompanyPage)
 
 export default CompanyPage;

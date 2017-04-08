@@ -4,6 +4,8 @@ import Company from '../models/Company'
 
 export const REQUEST_COMPANIES = 'REQUEST_COMPANIES'
 export const RECEIVE_COMPANIES = 'RECVEIVE_COMPANIES'
+export const REQUEST_COMPANY = 'REQUEST_COMPANY'
+export const RECEIVE_COMPANY = 'RECEIVE_COMPANY'
 
 
 function requestCompanies() {
@@ -19,6 +21,19 @@ function receiveCompanies(json) {
   }
 }
 
+function requestCompany() {
+  return {
+    type: REQUEST_COMPANY
+  }
+}
+
+function receiveCompany(json) {
+  return {
+    type: RECEIVE_COMPANY,
+    company: json.data.company
+  }
+}
+
 function fetchCompanies(industry_id) {
   return dispatch => {
     dispatch(requestCompanies())
@@ -28,7 +43,20 @@ function fetchCompanies(industry_id) {
   }
 }
 
+function fetchCompany(company_id) {
+  return dispatch => {
+    dispatch(requestCompany())
+    return fetch('api/companies/' + company_id)
+      .then(response => response.json())
+      .then(json => dispatch(receiveCompany(json)))
+  }
+}
+
 function shouldFetchCompanies(state) {
+  return true
+}
+
+function shouldFetchCompany(state) {
   return true
 }
 
@@ -36,6 +64,14 @@ export function fetchCompaniesIfNeeded(industry_id) {
   return (dispatch, getState) => {
     if (shouldFetchCompanies(getState())) {
       return dispatch(fetchCompanies(industry_id))
+    }
+  }
+}
+
+export function fetchCompanyIfNeeded(company_id) {
+  return (dispatch, getState) => {
+    if (shouldFetchCompany(getState())) {
+      return dispatch(fetchCompany(company_id))
     }
   }
 }
