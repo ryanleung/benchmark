@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import Company from '../models/Company'
+import CompanyListRow from './CompanyListRow'
 
 
 class CompanyList extends Component {
@@ -8,9 +9,8 @@ class CompanyList extends Component {
     return (
       <div>
         {this.props.items.map(company =>
-          <div>
-            {company.name}
-          </div>
+          <CompanyListRow key={company.id}
+                          company={company}/>
         )}
       </div>
     )

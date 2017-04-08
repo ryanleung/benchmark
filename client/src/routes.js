@@ -3,11 +3,12 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 
 import App from './App.js';
+import AddBenchmarkPage from './components/AddBenchmarkPage'
+import CompanyPage from './components/CompanyPage'
 import configureStore from './components/configureStore'
 import ExplorePage from './components/ExplorePage'
-import AddBenchmarkPage from './components/AddBenchmarkPage'
-import SignInPage from './components/SignInPage'
 import NotFoundPage from './components/NotFoundPage'
+import SignInPage from './components/SignInPage'
 
 const store = configureStore()
 
@@ -19,6 +20,7 @@ const Routes = (props) => (
         <IndexRoute component={ExplorePage} />
         <Route path="add_benchmark" component={AddBenchmarkPage} />
         <Route path="login" component={SignInPage} />
+        <Route path='industry/:industry_id/company/:company_id' component={CompanyPage} />
         <Route path="*" component={NotFoundPage} />
       </Route>
     </Router>
