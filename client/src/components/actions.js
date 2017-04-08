@@ -30,7 +30,7 @@ function requestCompany() {
 function receiveCompany(json) {
   return {
     type: RECEIVE_COMPANY,
-    company: json.data.company
+    company: Company.from_json(json.data.company)
   }
 }
 
@@ -46,7 +46,7 @@ function fetchCompanies(industry_id) {
 function fetchCompany(company_id) {
   return dispatch => {
     dispatch(requestCompany())
-    return fetch('api/companies/' + company_id)
+    return fetch('/api/companies/' + company_id)
       .then(response => response.json())
       .then(json => dispatch(receiveCompany(json)))
   }

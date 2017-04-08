@@ -31,7 +31,7 @@ class CompaniesController < ApplicationController
       data: {
         kind: Company.name,
         id: company.id,
-        item: company.as_json(include: :industry)
+        company: company.as_json(include: :industry)
       }
     }
   end
