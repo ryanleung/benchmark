@@ -8,6 +8,7 @@ import {
 } from './actions'
 
 
+// TODO: break reducers up by page? e.g. function CompanyPage, ExplorePage, etc.
 function companies(state = {
   isFetching: false,
   items: []
@@ -29,7 +30,7 @@ function companies(state = {
 
 function company(state = {
   isFetching: false,
-  company: null
+  item: null
 }, action) {
   switch (action.type) {
     case REQUEST_COMPANY:
@@ -39,7 +40,7 @@ function company(state = {
     case RECEIVE_COMPANY:
       return Object.assign({}, state, {
         isFetching: false,
-        company: action.company
+        item: action.company
       })
     default:
       return state

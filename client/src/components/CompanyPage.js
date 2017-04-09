@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import Company from '../models/Company'
 import { fetchCompanyIfNeeded } from './actions'
 
 
@@ -11,18 +12,30 @@ class CompanyPage extends Component {
   }
 
   render() {
+    const { item, isFetching } = this.props
+
     return (
-      <div className="CompanyPage">
-        <h1>Hi</h1>
+      <div>
+        {item && 
+          <div className="CompanyPage">
+            {item.name}
+          </div>
+        }
       </div>
     )
   }
 }
 
 CompanyPage.propTypes = {
+  item: PropTypes.instanceOf(Company),
   dispatch: PropTypes.func.isRequired
 }
 
-CompanyPage = connect()(CompanyPage)
+function mapStateToProps(state) {
+  const { company } = state
+  const { item, isFetching } = company
 
-export default CompanyPage;
+  return { item, isFetching }
+}
+
+export default connect(mapStateToProps)(CompanyPage);

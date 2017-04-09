@@ -11,7 +11,7 @@ class CompanyListRow extends Component {
     const cardHeaderSubtitle = `${company.city} / ${company.state}` 
 
     return (
-      <div class="CompanyListRow">
+      <div>
         <Card>
           <CardHeader title={cardHeaderTitle}
                       subtitle={cardHeaderSubtitle}
