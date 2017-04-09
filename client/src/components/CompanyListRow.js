@@ -1,20 +1,22 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
 import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card'
 
 import Company from '../models/Company'
+import {getCompanyPageLink} from '../utils'
 
 class CompanyListRow extends Component {
   render() {
     const {company} = this.props
+    const cardHeaderTitle = getCompanyPageLink(company)
+    const cardHeaderSubtitle = `${company.city} / ${company.state}` 
 
     return (
-      <div>
+      <div class="CompanyListRow">
         <Card>
-          <CardHeader title={company.name}
-                      subtitle={company.name}/>
+          <CardHeader title={cardHeaderTitle}
+                      subtitle={cardHeaderSubtitle}
+                      avatar={company.logo_img_url}/>
           <CardActions>
-            <Link to="/industry/1/company/1">LINK</Link>
           </CardActions>
         </Card>
       </div>

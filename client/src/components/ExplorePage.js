@@ -23,8 +23,8 @@ class ExplorePage extends Component {
         <div className="ExplorePage__search">
           <SearchBar />
         </div>
+        <h2>Companies</h2>
         <div className="ExplorePage__company-list">
-          <h2>Company List</h2>
           <CompanyListContainer />
         </div>
       </div>
