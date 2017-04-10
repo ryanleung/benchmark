@@ -2,10 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Avatar from 'material-ui/Avatar'
 import {GridList, GridTile} from 'material-ui/GridList'
+import IconButton from 'material-ui/IconButton';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 
 import Company from '../models/Company'
-import { fetchCompanyIfNeeded } from './actions'
+import Metric from '../models/Metric'
+import { fetchCompanyIfNeeded, fetchMetricsIfNeeded } from './actions'
 
 import './CompanyPage.css'
 
@@ -14,22 +17,23 @@ class CompanyPage extends Component {
   componentDidMount() {
     const { params, dispatch } = this.props
     dispatch(fetchCompanyIfNeeded(params.company_id))
+    dispatch(fetchMetricsIfNeeded(params.company_id))
   }
 
   render() {
-    const { item, isFetching } = this.props
+    const { companyItem, companyIsFetching, metricItems, metricsAreFetching } = this.props
 
     return (
       <div>
-        {item && 
+        {companyItem && 
           <div className="CompanyPage">
             <Toolbar>
               <ToolbarGroup firstChild={true}>
                 <Avatar
-                  src={item.logo_img_url}
+                  src={companyItem.logo_img_url}
                   size={50}
                   className="CompanyPage__avatar"/>
-                <ToolbarTitle text={item.name}/>
+                <ToolbarTitle text={companyItem.name}/>
               </ToolbarGroup>
             </Toolbar>
             <Toolbar>
@@ -37,10 +41,21 @@ class CompanyPage extends Component {
                 <ToolbarTitle text="Metrics Overview"/>
               </ToolbarGroup>
             </Toolbar>
-            <GridList cols={2}>
-              <GridTile>
-              </GridTile>
-            </GridList>
+            {metricItems && 
+              <GridList cols={2} cellHeight={200}>
+                {metricItems.map((metric) => 
+                  <GridTile
+                    key={metric.id}
+                    title={metric.name}
+                    actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                    actionPosition="left"
+                    subtitle={`${metric.value} ${metric.value_description}`}
+                    titlePosition="top"
+                    titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
+                  </GridTile>
+                )}
+              </GridList>
+            }
           </div>
         }
       </div>
@@ -49,15 +64,19 @@ class CompanyPage extends Component {
 }
 
 CompanyPage.propTypes = {
-  item: PropTypes.instanceOf(Company),
+  companyItem: PropTypes.instanceOf(Company),
+  metricItems: PropTypes.arrayOf(Metric),
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
-  const { company } = state
-  const { item, isFetching } = company
+  const { company, metrics } = state
+  const companyItem = company.item
+  const companyIsFetching = company.isFetching
+  const metricItems = metrics.items
+  const metricsAreFetching = metrics.isFetching
 
-  return { item, isFetching }
+  return { companyItem, companyIsFetching, metricItems, metricsAreFetching }
 }
 
 export default connect(mapStateToProps)(CompanyPage);

@@ -1,11 +1,14 @@
 import 'whatwg-fetch'
 
 import Company from '../models/Company'
+import Metric from '../models/Metric'
 
 export const REQUEST_COMPANIES = 'REQUEST_COMPANIES'
 export const RECEIVE_COMPANIES = 'RECVEIVE_COMPANIES'
 export const REQUEST_COMPANY = 'REQUEST_COMPANY'
 export const RECEIVE_COMPANY = 'RECEIVE_COMPANY'
+export const REQUEST_METRICS = 'REQUEST_METRICS'
+export const RECEIVE_METRICS = 'RECEIVE_METRICS'
 
 
 function requestCompanies() {
@@ -34,10 +37,23 @@ function receiveCompany(json) {
   }
 }
 
+function requestMetrics() {
+  return {
+    type: REQUEST_METRICS
+  }
+}
+
+function receiveMetrics(json) {
+  return {
+    type: RECEIVE_METRICS,
+    items: json.data.items.map(item => Metric.from_json(item))
+  }
+}
+
 function fetchCompanies(industry_id) {
   return dispatch => {
     dispatch(requestCompanies())
-    return fetch('/api/industries/' + industry_id + '/companies')
+    return fetch(`/api/industries/'${industry_id}/companies`)
       .then(response => response.json())
       .then(json => dispatch(receiveCompanies(json)))
   }
@@ -46,9 +62,18 @@ function fetchCompanies(industry_id) {
 function fetchCompany(company_id) {
   return dispatch => {
     dispatch(requestCompany())
-    return fetch('/api/companies/' + company_id)
+    return fetch(`/api/companies/${company_id}`)
       .then(response => response.json())
       .then(json => dispatch(receiveCompany(json)))
+  }
+}
+
+function fetchMetrics(company_id) {
+  return dispatch => {
+    dispatch(requestMetrics())
+    return fetch(`/api/companies/${company_id}/metrics`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveMetrics(json)))
   }
 }
 
@@ -57,6 +82,10 @@ function shouldFetchCompanies(state) {
 }
 
 function shouldFetchCompany(state) {
+  return true
+}
+
+function shouldFetchMetrics(state) {
   return true
 }
 
@@ -72,6 +101,14 @@ export function fetchCompanyIfNeeded(company_id) {
   return (dispatch, getState) => {
     if (shouldFetchCompany(getState())) {
       return dispatch(fetchCompany(company_id))
+    }
+  }
+}
+
+export function fetchMetricsIfNeeded(company_id) {
+  return (dispatch, getState) => {
+    if (shouldFetchMetrics(getState())) {
+      return dispatch(fetchMetrics(company_id))
     }
   }
 }

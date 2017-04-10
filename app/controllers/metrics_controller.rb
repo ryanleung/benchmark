@@ -20,7 +20,7 @@ class MetricsController < ApplicationController
     render json: {
       data: {
         kind: Metric.name,
-        items: metrics.map { |m| m.as_json(include: [:metric_name, :metric_type, :function]) }
+        items: metrics.map { |m| m.as_json(include: [:metric_name, :metric_type, :function, :business_unit]) }
       }
     }
   end
