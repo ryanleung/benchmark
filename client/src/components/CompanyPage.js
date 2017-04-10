@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Avatar from 'material-ui/Avatar'
 import {GridList, GridTile} from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 
@@ -14,10 +15,22 @@ import './CompanyPage.css'
 
 
 class CompanyPage extends Component {
+  constructor(props) {
+    super(props)
+    this.handleAddBenchmark = this.handleAddBenchmark.bind(this)
+  }
+
   componentDidMount() {
     const { params, dispatch } = this.props
     dispatch(fetchCompanyIfNeeded(params.company_id))
     dispatch(fetchMetricsIfNeeded(params.company_id))
+  }
+
+  handleAddBenchmark(e) {
+    e.preventDefault()
+
+    const { router } = this.props
+    router.push('/add_benchmark')
   }
 
   render() {
@@ -34,6 +47,9 @@ class CompanyPage extends Component {
                   size={50}
                   className="CompanyPage__avatar"/>
                 <ToolbarTitle text={companyItem.name}/>
+              </ToolbarGroup>
+              <ToolbarGroup>
+                <RaisedButton label="Add Benchmark" primary={true} onClick={this.handleAddBenchmark}/>
               </ToolbarGroup>
             </Toolbar>
             <Toolbar>

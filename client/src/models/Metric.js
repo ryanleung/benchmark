@@ -12,6 +12,7 @@ class Metric {
 
   static from_json(json) {
     var metric = new Metric()
+    metric.id = json.id
     metric.name = json.metric_name.name
     metric.type = json.metric_type.name
     metric.value = json.value
