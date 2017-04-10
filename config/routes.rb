@@ -9,12 +9,12 @@ Rails.application.routes.draw do
     end
 
     resources :industries do
-      resources :companies do
-        resources :metrics
-      end
+      resources :companies
     end
 
-    resources :companies
+    resources :companies do
+      resources :metrics
+    end
 end
 
 

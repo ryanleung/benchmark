@@ -5,7 +5,7 @@ task :seed_data => :environment do
     user = User.create name: "Vincent Vo",
                        email: "vincent.vo@gmail.com",
                        password: "vincent"
-    avg_salary_per_role = MetricName.create name: "Avg salary per role"
+    avg_salary_per_role = MetricName.create name: "Average salary per role"
     metric_type_org = MetricType.create name: "Org"
     function = Function.create name: "Engineering"
 
